@@ -6,18 +6,26 @@ import com.startup.factory.BillFactory;
 import com.startup.service.impl.BillServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
 
-@RestController
+@Controller
 @RequestMapping("/bill")
 public class BillController {
 
     @Autowired
     public BillServiceImpl billService;
+
+    @GetMapping("/form")
+    public String billForm(Model model) {
+        model.addAttribute("billForm", new Bill());
+        model.addAttribute("bills", billService.billList());
+        return "bill/form";
+    }
 
     @GetMapping("/list")
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
@@ -26,9 +34,13 @@ public class BillController {
         return "bill/list";
     }
 
-    @GetMapping("/form")
-    public String billForm(Model model) {
-        model.addAttribute("billForm", new Bill());
+    @GetMapping("/add")
+    public String billForm(@ModelAttribute Bill bill, Model model) {
+        Bill newBill = BillFactory.generateBill(bill.getAmount(),
+                bill.getPatientId(),
+                bill.getAppointId());
+        model.addAttribute("message", billService.create(newBill));
+        model.addAttribute("appointmentId",  bill.getAppointId());
         return "bill/form";
     }
 
@@ -51,17 +63,12 @@ public class BillController {
 
 
 
-
-
-
-
     @PostMapping(value = "/generate")
     public Bill create(@RequestBody Bill bill){
         Bill newBill = BillFactory.generateBill(bill.getAmount(),
                 bill.getPatientId(),
                 bill.getAppointId());
         return billService.create(newBill);
-
     }
 
     @GetMapping("/read/{billNo}")

@@ -1,10 +1,8 @@
 package com.startup.entity;
 
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Set;
 
 /**
@@ -22,7 +20,7 @@ public class User extends AbstractPersistable<Long> {
     private String emailAddress;
     private String password;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "role_id")
     private Role role;
 

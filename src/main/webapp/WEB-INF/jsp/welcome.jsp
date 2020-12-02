@@ -7,35 +7,69 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <html>
 <head>
     <title>Home page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="${path}/jquery.boot.js"></script>
+
+    <style>
+        .row {
+            margin-top: 50px;
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+        .menu {
+            height: 100%;
+            max-width: 220px;
+            position: fixed;
+            background-color: antiquewhite;
+        }
+        .menu .navbar-nav li {
+            width: 100%;
+            border-bottom: 1px solid darkgoldenrod;
+        }
+    </style>
+
 </head>
 <body>
-    <div class="">
-        <div class="">
-            <h1>${message}</h1>
+
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="navbar-brand">Appointment Booking System</div>
+            </div>
         </div>
+    </div>
 
 
-        <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 
-        <div class="">
-            <a href="${path}/user/list">User list</a>
-        </div>
-        <div class="">
-            <a href="${path}/user/form">Create User</a>
+    <div class="row">
+        <div class="menu navbar navbar-default">
+            <div class="menu-container">
+                <ul class="nav navbar-nav">
+                    <li><a href="javascript:void(0)" id="userList">Users</a></li>
+<%--                    <li><a href="${path}/user/form">Create User</a></li>--%>
+                    <li><a href="javascript:void(0)" id="appointmentList">Appointments</a></li>
+<%--                    <li><a href="${path}/appointment/form">Create Appointment</a></li>--%>
+                    <li><a href="javascript:void(0)" id="billList">Bills</a></li>
+<%--                    <li><a href="${path}/bill/form">Create Bill</a></li>--%>
+                </ul>
+            </div>
         </div>
 
-        <div class="">
-            <a href="${path}/appointment/list">Appointment List</a>
+        <div class="container-fluid">
+            <div class="panel-body" style="margin-left: 210px;">
+                <p>${message}</p>
+            </div>
         </div>
-        <div class="">
-            <a href="${path}/appointment/form">Create Appointment</a>
-        </div>
-
-        <div class="">
-            <a href="${path}/bill/list">Bill List</a>
+    </div>
+    <div class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            <div class="col-md-10 navbar-text text-center">2020, All Rights Reserved</div>
         </div>
     </div>
 

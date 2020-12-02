@@ -37,7 +37,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User addUser(User user) {
-        user.setRole(roleRepository.findById(user.getRole().getId()).orElse(null));
+//        user.setRole(roleRepository.findById(user.getRole().getId()).get());
+      //  System.out.println("^%$#^#%$^#%$^#%$^#%$^#%$^#%$^#%" + roleRepository.findById(user.getRole().getId()).get());
         return this.repository.save(user);
     }
 
@@ -76,10 +77,7 @@ public class UserServiceImpl implements UserService {
 //        return this.repository.findById(id).get();
 //    }
 //
-//    @Override
-//    public void createUser(User user) {
-//        this.repository.save(user);
-//    }
+
 //
 //    @Override
 //    public void deleteUserById(String id) {
@@ -87,11 +85,9 @@ public class UserServiceImpl implements UserService {
 //    }
 
 
-
-
     @Override
     public User create(User user) {
-        return this.repository.save(user);
+        return null;
     }
 
     @Override

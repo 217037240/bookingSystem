@@ -7,7 +7,7 @@
     <title>Messages</title>
 </head>
 <body>
-    <p>${messages}</p>
+    <p>${message}</p>
     <p><a href="${path}/user/list"/>User List</p>
     <p><a href="${path}/user/form"/>Uer Form</p>
     <p><a href="${path}/appointment/list"/>Appointment List</p>

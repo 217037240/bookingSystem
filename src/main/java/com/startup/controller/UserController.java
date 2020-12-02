@@ -37,7 +37,7 @@ public class UserController {
 
     @GetMapping("/edit/{id}")
     public String editUser(@PathVariable Long id, Model model){
-        model.addAttribute("userForm", userService.findOne(id));
+        model.addAttribute("userForm", userService.findById(id));
         model.addAttribute("roles", userService.roleList());
         return "user/form";
     }
@@ -59,14 +59,18 @@ public class UserController {
 
     @PostMapping("/add")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String addUser(@ModelAttribute User user, Model model) {
+    public String addUser(@ModelAttribute("userForm") User user, Model model) {
         String message="";
         if(user.getId() == null){
             message = "added";
         } else {
             message = "updated";
         }
+        model.addAttribute("name", user.getName());
         model.addAttribute("message", userService.addUser(user).getUsername() + " " + message + " add successfull");
+
+        System.out.println("^%$#^#%$^#%$^#%$^#%$^#%$^#%$^#% TESSTT");
+
         return "messages";
     }
 

@@ -1,5 +1,6 @@
 package com.startup.entity;
 
+import org.hibernate.annotations.CascadeType;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.Entity;
